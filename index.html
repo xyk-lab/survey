@@ -102,44 +102,7 @@
         const errorMessage = document.getElementById('error-message');
         const surveyContent = document.getElementById('survey-content');
 
-        submitBtn.addEventListener('click', function(event) {
-            event.preventDefault();
-            const q1 = form.elements['q1'].value;
-            const q2 = form.elements['q2'].value;
-            const q3 = form.elements['q3'].value;
-
-            if (q1 && q2 && q3) {
-                errorMessage.style.display = 'none';
-                submitBtn.disabled = true;
-                submitBtn.textContent = '提交中...';
-                
-                const results = {
-                    lip_sync: parseInt(q1),
-                    liveliness: parseInt(q2),
-                    realism: parseInt(q3)
-                };
-                
-                fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(results)
-                })
-                .then(res => {
-                    console.log("Data sent successfully.", results);
-                    // 隐藏整个问卷内容，并显示感谢信息
-                    surveyContent.innerHTML = '<h2>感谢您的参与！您的回答已成功提交。</h2>';
-                })
-                .catch(err => {
-                    console.error("Error sending data:", err);
-                    alert("提交时发生错误，请重试。");
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = '提交';
-                });
-            } else {
-                errorMessage.style.display = 'block';
-            }
-        });
+       });
     </script>
 </body>
 </html>
