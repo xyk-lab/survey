@@ -32,7 +32,7 @@
         <h1>请您评判哪个视频的面部动画效果更好</h1>
         <div class="instructions">
              <p>在本任务中，您将看到一个包含左右两个分屏的视频，分别代表 A (左) 和 B (右) 两种方法。它们的面部动作和口型同步都是基于相同的音频生成的。</p>
-             <!-- 其他指导语和之前一样 -->
+             <!-- 其他指导语 -->
         </div>
         
         <!-- ==================== 第 1 题 (只有一个题目) ==================== -->
@@ -40,7 +40,7 @@
             <div id="survey-content-1">
                 <h2>第 1 题</h2>
                 <div class="video-container">
-                    <video controls src="your_combined_video.mp4"></video> <!-- 视频文件名 -->
+                    <video controls src="your_combined_video.mp4"></video> <!-- ！！！修改视频文件名！！！ -->
                 </div>
                 <div class="questions-container">
                     <form id="study-form-1">
@@ -56,6 +56,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <!-- === 第一个维度 === -->
                                 <tr>
                                     <td><strong>口型同步性</strong></td>
                                     <td><input type="radio" name="lip_sync" value="1"></td>
@@ -64,6 +65,7 @@
                                     <td><input type="radio" name="lip_sync" value="4"></td>
                                     <td><input type="radio" name="lip_sync" value="5"></td>
                                 </tr>
+                                <!-- === 第二个维度 === -->
                                 <tr>
                                     <td><strong>面部表情与真实感</strong></td>
                                     <td><input type="radio" name="realism" value="1"></td>
@@ -88,21 +90,13 @@
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwz0kBj8DlEl6h5cEStT9pdxHWN1qA8Esvp4j64s4JccWomaTg5wOEjLotNRBrOOiPA/exec';
 
         // ==================== 核心配置区域 ====================
-        // 在这里定义每一题的“答案”
         const questionConfig = {
-            // "1" 对应 data-question-id="1"
             "1": {
-                modelA: "Ours",         // ！！！定义第1题左侧视频的模型名！！！
-                modelB: "DiffPoseTalk"  // ！！！定义第1题右侧视频的模型名！！！
+                modelA: "Ours",
+                modelB: "DiffPoseTalk"
             }
-            // 如果未来有第2题，在这里添加：
-            // "2": {
-            //     modelA: "FaceFormer",
-            //     modelB: "Ours" 
-            // }
         };
         // =======================================================
-
 
         const submitBtn = document.querySelector('.submit-button');
         submitBtn.addEventListener('click', function(event) {
@@ -113,16 +107,17 @@
             const surveyContent = document.getElementById(`survey-content-${questionId}`);
             const errorMessage = document.getElementById(`error-message-${questionId}`);
 
+            // === 修改：只获取您需要的两个维度的值 ===
             const lip_sync_choice = form.elements['lip_sync'].value;
             const realism_choice = form.elements['realism'].value;
 
+            // === 修改：确保这两个维度都被选中 ===
             if (lip_sync_choice && realism_choice) {
                 errorMessage.style.display = 'none';
                 event.target.disabled = true;
                 event.target.textContent = '提交中...';
 
-                // --- 核心翻译逻辑 ---
-                const config = questionConfig[questionId]; // 获取当前题目的配置
+                const config = questionConfig[questionId];
                 const modelA = config.modelA;
                 const modelB = config.modelB;
                 
@@ -138,6 +133,7 @@
                     }
                 }
 
+                // === 修改：只打包您需要的两个维度的数据 ===
                 const results = {
                     question_id: `第 ${questionId} 题`,
                     lip_sync: translateChoice(lip_sync_choice),
