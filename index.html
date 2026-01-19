@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>面部动画用户研究</title>
+    <style>
+        /* CSS 样式和之前一样，但去掉了 completion-section 的样式 */
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f4f9; color: #333; max-width: 960px; margin: 20px auto; padding: 20px; line-height: 1.6; }
+        .container { background-color: #fff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        h1, h2, h3 { text-align: center; color: #2c3e50; }
+        .instructions { text-align: left; margin-bottom: 25px; background-color: #ecf0f1; padding: 15px; border-radius: 8px; border-left: 5px solid #3498db; }
+        .video-container { display: flex; justify-content: space-around; gap: 20px; margin-bottom: 25px; }
+        .video-wrapper { text-align: center; flex: 1; }
+        video { width: 100%; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+        .questions-container { background-color: #fafafa; padding: 20px; border-radius: 8px; border-top: 2px solid #e0e0e0; }
+        .question-block { margin-bottom: 30px; }
+        .options { display: flex; justify-content: space-between; text-align: center; }
+        .option { display: flex; flex-direction: column; align-items: center; cursor: pointer; padding: 10px; border-radius: 5px; transition: background-color 0.2s; }
+        .option:hover { background-color: #eef5ff; }
+        input[type="radio"] { margin-bottom: 8px; transform: scale(1.2); }
+        .submit-container { text-align: center; margin-top: 25px; }
+        #submit-btn { padding: 12px 30px; font-size: 18px; font-weight: bold; background-color: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.2s; }
+        #submit-btn:disabled { background-color: #bdc3c7; cursor: not-allowed; }
+        #submit-btn:hover:not(:disabled) { background-color: #2ecc71; }
+        #error-message { color: #e74c3c; text-align: center; margin-top: 15px; font-weight: bold; display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>请您评判哪个视频的面部动画效果更好</h1>
+        <div class="instructions">
+            <p>在本任务中，您会看到由两种不同方法生成的虚拟角色动画，它们的语音是完全相同的。</p>
+            <p style="text-align: center; color: #c0392b; font-weight: bold;">❗两个视频都有声音，请您务必打开音频进行收听！</p>
+            <p>请您根据以下三个标准，选出您更偏好的视频：</p>
+            <ol>
+                <li><strong>唇形与语音的同步性：</strong> 嘴唇动作是否与发音准确对应？</li>
+                <li><strong>面部表情的生动性：</strong> 整体面部动画（眉毛、眼神等）是否看起来更生动、更富有动态？</li>
+                <li><strong>动画的真实感：</strong> 整体动画看起来是否更真实自然？有没有不协调或夸张的地方？</li>
+            </ol>
+            <p>请至少完整观看并收听两个视频一次，然后再进行选择。</p>
+        </div>
+        
+        <div id="survey-content">
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <h3>视频 A</h3>
+                    <video controls src="video_a.mp4"></video>
+                </div>
+                <div class="video-wrapper">
+                    <h3>视频 B</h3>
+                    <video controls src="video_b.mp4"></video>
+                </div>
+            </div>
+
+            <div class="questions-container">
+                <form id="study-form">
+                    <div class="question-block">
+                        <h3>1. 哪个视频的唇形与语音同步性更好？</h3>
+                        <div class="options">
+                            <label class="option">非常偏好视频A<br><input type="radio" name="q1" value="1"></label>
+                            <label class="option">偏好视频A<br><input type="radio" name="q1" value="2"></label>
+                            <label class="option">无明显差异<br><input type="radio" name="q1" value="3"></label>
+                            <label class="option">偏好视频B<br><input type="radio" name="q1" value="4"></label>
+                            <label class="option">非常偏好视频B<br><input type="radio" name="q1" value="5"></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <h3>2. 哪个视频的面部表情更生动？</h3>
+                        <div class="options">
+                            <label class="option">非常偏好视频A<br><input type="radio" name="q2" value="1"></label>
+                            <label class="option">偏好视频A<br><input type="radio" name="q2" value="2"></label>
+                            <label class="option">无明显差异<br><input type="radio" name="q2" value="3"></label>
+                            <label class="option">偏好视频B<br><input type="radio" name="q2" value="4"></label>
+                            <label class="option">非常偏好视频B<br><input type="radio" name="q2" value="5"></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <h3>3. 哪个视频的动画更真实？</h3>
+                        <div class="options">
+                            <label class="option">非常偏好视频A<br><input type="radio" name="q3" value="1"></label>
+                            <label class="option">偏好视频A<br><input type="radio" name="q3" value="2"></label>
+                            <label class="option">无明显差异<br><input type="radio" name="q3" value="3"></label>
+                            <label class="option">偏好视频B<br><input type="radio" name="q3" value="4"></label>
+                            <label class="option">非常偏好视频B<br><input type="radio" name="q3" value="5"></label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="submit-container">
+                <p id="error-message">为继续，请您回答所有问题！</p>
+                <button id="submit-btn">提交</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwz0kBj8DlEl6h5cEStT9pdxHWN1qA8Esvp4j64s4JccWomaTg5wOEjLotNRBrOOiPA/exec';
+
+        const form = document.getElementById('study-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const errorMessage = document.getElementById('error-message');
+        const surveyContent = document.getElementById('survey-content');
+
+        submitBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+            const q1 = form.elements['q1'].value;
+            const q2 = form.elements['q2'].value;
+            const q3 = form.elements['q3'].value;
+
+            if (q1 && q2 && q3) {
+                errorMessage.style.display = 'none';
+                submitBtn.disabled = true;
+                submitBtn.textContent = '提交中...';
+                
+                const results = {
+                    lip_sync: parseInt(q1),
+                    liveliness: parseInt(q2),
+                    realism: parseInt(q3)
+                };
+                
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(results)
+                })
+                .then(res => {
+                    console.log("Data sent successfully.", results);
+                    // 隐藏整个问卷内容，并显示感谢信息
+                    surveyContent.innerHTML = '<h2>感谢您的参与！您的回答已成功提交。</h2>';
+                })
+                .catch(err => {
+                    console.error("Error sending data:", err);
+                    alert("提交时发生错误，请重试。");
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = '提交';
+                });
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
