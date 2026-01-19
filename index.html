@@ -8,65 +8,44 @@
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f4f9; color: #333; max-width: 960px; margin: 20px auto; padding: 20px; line-height: 1.6; }
         .container { background-color: #fff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         h1, h2 { text-align: center; color: #2c3e50; }
-        .instructions { text-align: left; margin-bottom: 25px; background-color: #ecf0f1; padding: 15px; border-radius: 8px; border-left: 5px solid #3498db; }
-        .instructions ul { padding-left: 20px; }
-        
-        /* 视频容器现在只包含一个视频 */
-        .video-container {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        video {
-            width: 50%; /* 视频宽度占满容器 */
-            max-width: 400px; /* 您可以根据视频的宽高比调整最大宽度 */
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-
+        .instructions { /* ...样式和之前一样... */ }
+        .video-container { text-align: center; margin-bottom: 25px; }
+        video { width: 100%; max-width: 800px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
         .questions-container { background-color: #fafafa; padding: 20px; border-radius: 8px; border-top: 2px solid #e0e0e0; }
-        .matrix-table { width: 100%; border-collapse: collapse; text-align: center; }
-        .matrix-table th, .matrix-table td { padding: 15px 10px; }
-        .matrix-table thead th { font-size: 14px; font-weight: normal; color: #555; }
-        .matrix-table tbody tr { border-top: 1px solid #e0e0e0; }
-        .matrix-table tbody td:first-child { text-align: left; font-weight: bold; width: 30%; }
-        .matrix-table input[type="radio"] { transform: scale(1.3); cursor: pointer; }
+        .matrix-table { /* ...样式和之前一样... */ }
         .submit-container { text-align: center; margin-top: 25px; }
-        #submit-btn { padding: 12px 30px; font-size: 18px; font-weight: bold; background-color: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.2s; }
-        #submit-btn:disabled { background-color: #bdc3c7; cursor: not-allowed; }
-        #submit-btn:hover:not(:disabled) { background-color: #2ecc71; }
-        #error-message { color: #e74c3c; text-align: center; margin-top: 15px; font-weight: bold; display: none; }
+        #submit-btn { /* ...样式和之前一样... */ }
+        .error-message { color: #e74c3c; text-align: center; margin-top: 15px; font-weight: bold; display: none; }
+        
+        /* 新增：每个题目模块的样式 */
+        .question-item {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .success-message {
+            color: #27ae60;
+            font-size: 20px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>请您评判哪个视频的面部动画效果更好</h1>
         <div class="instructions">
-            <p>在本任务中，您将看到一个包含左右两个分屏的视频，分别代表 A 和 B 两种方法。它们的面部动作和口型同步都是基于相同的音频生成的。</p>
-            <p style="text-align: center; color: #c0392b; font-weight: bold;">❗视频有声音，请听！</p>
-            <p>请至少完整观看并收听视频一次，然后根据以下维度进行选择：</p>
-            <ol>
-                <li><strong>哪个视频的口型同步性更好？</strong>
-                    <ul>
-                        <li>关注每个音节的准确发音。</li>
-                        <li>口部开合与语音是否同步？</li>
-                    </ul>
-                </li>
-                <li><strong>哪个视频的面部表情更丰富，情感更真实？</strong>
-                    <ul>
-                        <li>请选出看起来整体面部动作更生动、动态的视频。</li>
-                    </ul>
-                </li>
-            </ol>
+            <!-- 指导语部分和之前一样 -->
         </div>
         
-        <div id="survey-content">
+        <!-- ==================== 第 1 题 ==================== -->
+        <div class="question-item" id="item-1">
+            <h2>第 1 题</h2>
             <div class="video-container">
-                <!-- 现在只有一个视频，并且带有浏览器默认的控制器 -->
-                <video controls src="your_combined_video.mp4"></video>
+                <video controls src="1.mp4"></video> <!-- ！！！修改视频文件名！！！ -->
             </div>
-
             <div class="questions-container">
-                <form id="study-form">
+                <form id="study-form-1">
                     <table class="matrix-table">
                         <thead>
                             <tr>
@@ -81,75 +60,152 @@
                         <tbody>
                             <tr>
                                 <td><strong>口型同步性</strong></td>
-                                <td><input type="radio" name="lip_sync" value="A (左侧) 明显更好"></td>
-                                <td><input type="radio" name="lip_sync" value="A (左侧) 略好一些"></td>
-                                <td><input type="radio" name="lip_sync" value="效果相当"></td>
-                                <td><input type="radio" name="lip_sync" value="B (右侧) 略好一些"></td>
-                                <td><input type="radio" name="lip_sync" value="B (右侧) 明显更好"></td>
+                                <td><input type="radio" name="lip_sync_1" value="A (左侧) 明显更好"></td>
+                                <td><input type="radio" name="lip_sync_1" value="A (左侧) 略好一些"></td>
+                                <td><input type="radio" name="lip_sync_1" value="效果相当"></td>
+                                <td><input type="radio" name="lip_sync_1" value="B (右侧) 略好一些"></td>
+                                <td><input type="radio" name="lip_sync_1" value="B (右侧) 明显更好"></td>
                             </tr>
                             <tr>
                                 <td><strong>面部表情与真实感</strong></td>
-                                <td><input type="radio" name="realism" value="A (左侧) 明显更好"></td>
-                                <td><input type="radio" name="realism" value="A (左侧) 略好一些"></td>
-                                <td><input type="radio" name="realism" value="效果相当"></td>
-                                <td><input type="radio" name="realism" value="B (右侧) 略好一些"></td>
-                                <td><input type="radio" name="realism" value="B (右侧) 明显更好"></td>
+                                <td><input type="radio" name="realism_1" value="A (左侧) 明显更好"></td>
+                                <td><input type="radio" name="realism_1" value="A (左侧) 略好一些"></td>
+                                <td><input type="radio" name="realism_1" value="效果相当"></td>
+                                <td><input type="radio" name="realism_1" value="B (右侧) 略好一些"></td>
+                                <td><input type="radio" name="realism_1" value="B (右侧) 明显更好"></td>
                             </tr>
                         </tbody>
                     </table>
                 </form>
             </div>
             <div class="submit-container">
-                <p id="error-message">为继续，请您回答所有问题！</p>
-                <button id="submit-btn">提交</button>
+                <p class="error-message" id="error-message-1">为继续，请您回答所有问题！</p>
+                <button class="submit-button" data-question-id="1">提交第 1 题</button>
             </div>
         </div>
+
+        <!-- ==================== 第 2 题 ==================== -->
+        <div class="question-item" id="item-2">
+            <h2>第 2 题</h2>
+            <div class="video-container">
+                <video controls src="2.mp4"></video> <!-- ！！！修改视频文件名！！！ -->
+            </div>
+            <div class="questions-container">
+                <form id="study-form-2">
+                    <!-- 表格结构和第1题一样，但 name 属性不同 -->
+                    <table class="matrix-table">
+                        <!-- thead 和第1题一样 -->
+                        <tbody>
+                            <tr>
+                                <td><strong>口型同步性</strong></td>
+                                <td><input type="radio" name="lip_sync_2" value="A (左侧) 明显更好"></td>
+                                <td><input type="radio" name="lip_sync_2" value="A (左侧) 略好一些"></td>
+                                <td><input type="radio" name="lip_sync_2" value="效果相当"></td>
+                                <td><input type="radio" name="lip_sync_2" value="B (右侧) 略好一些"></td>
+                                <td><input type="radio" name="lip_sync_2" value="B (右侧) 明显更好"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>面部表情与真实感</strong></td>
+                                <td><input type="radio" name="realism_2" value="A (左侧) 明显更好"></td>
+                                <td><input type="radio" name="realism_2" value="A (左侧) 略好一些"></td>
+                                <td><input type="radio" name="realism_2" value="效果相当"></td>
+                                <td><input type="radio" name="realism_2" value="B (右侧) 略好一些"></td>
+                                <td><input type="radio" name="realism_2" value="B (右侧) 明显更好"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div class="submit-container">
+                <p class="error-message" id="error-message-2">为继续，请您回答所有问题！</p>
+                <button class="submit-button" data-question-id="2">提交第 2 题</button>
+            </div>
+        </div>
+
+        <!-- ==================== 第 3 题 ==================== -->
+        <div class="question-item" id="item-3">
+            <h2>第 3 题</h2>
+            <div class="video-container">
+                <video controls src="3.mp4"></video> <!-- ！！！修改视频文件名！！！ -->
+            </div>
+            <div class="questions-container">
+                <form id="study-form-3">
+                     <!-- 表格结构和第1题一样，但 name 属性不同 -->
+                </form>
+            </div>
+            <div class="submit-container">
+                <p class="error-message" id="error-message-3">为继续，请您回答所有问题！</p>
+                <button class="submit-button" data-question-id="3">提交第 3 题</button>
+            </div>
+        </div>
+
+        <!-- ==================== 第 4 题 ==================== -->
+        <div class="question-item" id="item-4">
+            <!-- ... 内容结构同上，所有 id 和 name 里的数字是 4 ... -->
+        </div>
+        
+        <!-- ==================== 第 5 题 ==================== -->
+        <div class="question-item" id="item-5">
+            <!-- ... 内容结构同上，所有 id 和 name 里的数字是 5 ... -->
+        </div>
+
     </div>
 
     <script>
-        // JavaScript 现在变得非常简单
+        // JavaScript (模块化版本)
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwz0kBj8DlEl6h5cEStT9pdxHWN1qA8Esvp4j64s4JccWomaTg5wOEjLotNRBrOOiPA/exec';
 
-        const form = document.getElementById('study-form');
-        const submitBtn = document.getElementById('submit-btn');
-        const errorMessage = document.getElementById('error-message');
-        const surveyContent = document.getElementById('survey-content');
+        // 获取页面上所有的提交按钮
+        const submitButtons = document.querySelectorAll('.submit-button');
 
-        submitBtn.addEventListener('click', function(event) {
-            event.preventDefault();
-            
-            const lip_sync_value = form.elements['lip_sync'].value;
-            const realism_value = form.elements['realism'].value;
+        // 为每一个按钮添加点击事件
+        submitButtons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                
+                // 从按钮的 data-* 属性获取题号
+                const questionId = event.target.dataset.questionId;
+                
+                // 根据题号找到对应的表单和元素
+                const form = document.getElementById(`study-form-${questionId}`);
+                const errorMessage = document.getElementById(`error-message-${questionId}`);
+                const questionItem = document.getElementById(`item-${questionId}`);
 
-            if (lip_sync_value && realism_value) {
-                errorMessage.style.display = 'none';
-                submitBtn.disabled = true;
-                submitBtn.textContent = '提交中...';
-                
-                const results = {
-                    lip_sync: lip_sync_value,
-                    realism: realism_value
-                };
-                
-                fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(results)
-                })
-                .then(res => {
-                    console.log("Data sent successfully.", results);
-                    surveyContent.innerHTML = '<h2>感谢您的参与！您的回答已成功提交。</h2>';
-                })
-                .catch(err => {
-                    console.error("Error sending data:", err);
-                    alert("提交时发生错误，请重试。");
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = '提交';
-                });
-            } else {
-                errorMessage.style.display = 'block';
-            }
+                const lip_sync_value = form.elements[`lip_sync_${questionId}`].value;
+                const realism_value = form.elements[`realism_${questionId}`].value;
+
+                if (lip_sync_value && realism_value) {
+                    errorMessage.style.display = 'none';
+                    event.target.disabled = true;
+                    event.target.textContent = '提交中...';
+                    
+                    const results = {
+                        question_id: `第 ${questionId} 题`, // 新增题号数据
+                        lip_sync: lip_sync_value,
+                        realism: realism_value
+                    };
+                    
+                    fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(results)
+                    })
+                    .then(res => {
+                        console.log(`Data for question ${questionId} sent successfully.`, results);
+                        // 提交成功后，用感谢信息替换整个题目模块的内容
+                        questionItem.innerHTML = `<h2 class="success-message">第 ${questionId} 题 - 感谢您，已成功提交！</h2>`;
+                    })
+                    .catch(err => {
+                        console.error(`Error sending data for question ${questionId}:`, err);
+                        alert(`第 ${questionId} 题提交时发生错误，请重试。`);
+                        event.target.disabled = false;
+                        event.target.textContent = `提交第 ${questionId} 题`;
+                    });
+                } else {
+                    errorMessage.style.display = 'block';
+                }
+            });
         });
     </script>
 </body>
