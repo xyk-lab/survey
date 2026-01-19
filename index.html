@@ -41,7 +41,7 @@
             <div class="question-item" id="item-1">
                 <h2>第 1 题</h2>
                 <div class="video-container">
-                    <video controls src="your_combined_video.mp4"></video> <!-- ！！！修改第1题的视频文件名！！！ -->
+                    <video controls src="your_cmobined_video.mp4"></video> <!-- ！！！修改第1题的视频文件名！！！ -->
                 </div>
                 <div class="questions-container">
                     <table class="matrix-table">
@@ -81,7 +81,7 @@
             <div class="question-item" id="item-2">
                 <h2>第 2 题</h2>
                 <div class="video-container">
-                    <video controls src="2.mp4"></video> <!-- ！！！修改第2题的视频文件名！！！ -->
+                    <video controls src="your_cmobined_video.mp4"></video> <!-- ！！！修改第2题的视频文件名！！！ -->
                 </div>
                 <div class="questions-container">
                     <table class="matrix-table">
@@ -121,7 +121,7 @@
             <div class="question-item" id="item-3">
                 <h2>第 3 题</h2>
                 <div class="video-container">
-                    <video controls src="3.mp4"></video> <!-- ！！！修改第3题的视频文件名！！！ -->
+                    <video controls src="your_cmobined_video.mp4"></video> <!-- ！！！修改第3题的视频文件名！！！ -->
                 </div>
                 <div class="questions-container">
                     <table class="matrix-table">
@@ -161,7 +161,7 @@
             <div class="question-item" id="item-4">
                 <h2>第 4 题</h2>
                 <div class="video-container">
-                    <video controls src="4.mp4"></video> <!-- ！！！修改第4题的视频文件名！！！ -->
+                    <video controls src="your_cmobined_video.mp4"></video> <!-- ！！！修改第4题的视频文件名！！！ -->
                 </div>
                 <div class="questions-container">
                     <table class="matrix-table">
@@ -201,7 +201,7 @@
             <div class="question-item" id="item-5">
                 <h2>第 5 题</h2>
                 <div class="video-container">
-                    <video controls src="5.mp4"></video> <!-- ！！！修改第5题的视频文件名！！！ -->
+                    <video controls src="your_cmobined_video.mp4"></video> <!-- ！！！修改第5题的视频文件名！！！ -->
                 </div>
                 <div class="questions-container">
                     <table class="matrix-table">
@@ -246,17 +246,27 @@
     </div>
 
     <script>
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzlcqy7A-FJbGnIrPCT-AGHCWllu2ZhICERteBWHNGdhwlY4ko20FOJ3JXdfg-ogKCq/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbycwz4IgVtZhEZ8_OxgJt0HqYfNFCfimvzXkYjVsNUItjIKD6Xwy-8oSA1WPqiMmESw/exec';
 
         // ==================== 核心配置区域 ====================
         const questionConfig = {
             "1": { modelA: "Ours", modelB: "DiffPoseTalk" },
-            "2": { modelA: "DiffPoseTalk", modelB: "Ours" },
+            "2": { modelA: "DiffPoseTalk", modelB: "Ours" }, // 示例：第2题左右模型对调
             "3": { modelA: "Ours", modelB: "FaceFormer" },
             "4": { modelA: "EMOTE", modelB: "Ours" },
             "5": { modelA: "Ours", modelB: "StyleTalk" }
         };
         // =======================================================
+
+        function generateUserID() {
+            let userID = localStorage.getItem('surveyUserID');
+            if (!userID) {
+                userID = 'user_' + Date.now().toString(36) + Math.random().toString(36).substring(2);
+                localStorage.setItem('surveyUserID', userID);
+            }
+            return userID;
+        }
+        const userID = generateUserID();
 
         const masterForm = document.getElementById('master-form');
         const masterSubmitBtn = document.getElementById('master-submit-button');
@@ -267,30 +277,25 @@
             event.preventDefault();
             
             let allAnswered = true;
-            const allResults = [];
+            const finalResults = { userID: userID };
 
-            // 循环检查每一题是否都已回答
             for (let i = 1; i <= totalQuestions; i++) {
                 const lip_sync_choice = masterForm.elements[`lip_sync_${i}`].value;
                 const realism_choice = masterForm.elements[`realism_${i}`].value;
 
-                // 如果有任何一题的任何一个维度没有选择，则标记为未全部回答
                 if (!lip_sync_choice || !realism_choice) {
                     allAnswered = false;
                     break; 
                 }
 
-                // 获取当前题目的配置
                 const config = questionConfig[i];
                 if (!config) {
                     alert(`错误：找不到第 ${i} 题的配置！`);
                     allAnswered = false;
                     break;
                 }
-                const modelA = config.modelA;
-                const modelB = config.modelB;
                 
-                function translateChoice(choice) {
+                function translateChoice(choice, modelA, modelB) {
                     const choiceNum = parseInt(choice);
                     switch (choiceNum) {
                         case 1: return `${modelA} (明显更好)`;
@@ -302,12 +307,8 @@
                     }
                 }
                 
-                // 将翻译后的结果存入数组
-                allResults.push({
-                    question_id: `第 ${i} 题`,
-                    lip_sync: translateChoice(lip_sync_choice),
-                    realism: translateChoice(realism_choice)
-                });
+                finalResults[`q${i}_lip_sync`] = translateChoice(lip_sync_choice, config.modelA, config.modelB);
+                finalResults[`q${i}_realism`] = translateChoice(realism_choice, config.modelA, config.modelB);
             }
 
             if (allAnswered) {
@@ -315,37 +316,29 @@
                 masterSubmitBtn.disabled = true;
                 masterSubmitBtn.textContent = '提交中...';
 
-                // 将所有结果逐一发送到后台
-                const promises = allResults.map(result => 
-                    fetch(SCRIPT_URL, {
-                        method: 'POST',
-                        mode: 'no-cors', // 必须设置，否则会因跨域策略报错
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(result)
-                    })
-                );
-
-                // 等待所有提交都完成后，再显示成功信息
-                Promise.all(promises)
-                    .then(() => {
-                        console.log("All data sent successfully.", allResults);
-                        masterForm.innerHTML = `<h2 class="success-message">全部提交成功，感谢您的参与！</h2>`;
-                    })
-                    .catch(err => {
-                        console.error("Error sending data:", err);
-                        alert("提交过程中发生网络错误，请刷新页面重试。");
-                        masterSubmitBtn.disabled = false;
-                        masterSubmitBtn.textContent = '全部提交';
-                    });
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(finalResults)
+                })
+                .then(() => {
+                    console.log("All data sent successfully as a single package.", finalResults);
+                    masterForm.innerHTML = `<h2 class="success-message">全部提交成功，感谢您的参与！</h2>`;
+                })
+                .catch(err => {
+                    console.error("Error sending data:", err);
+                    alert("提交过程中发生网络错误，请刷新页面重试。");
+                    masterSubmitBtn.disabled = false;
+                    masterSubmitBtn.textContent = '全部提交';
+                });
             } else {
                 masterErrorMsg.style.display = 'block';
             }
         });
     </script>
 </body>
-</html>block';
+</html>.display = 'block';
             }
         });
     </script>
