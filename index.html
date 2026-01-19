@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>面部动画用户研究</title>
     <style>
-        /* CSS 样式和之前一样，但去掉了 completion-section 的样式 */
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f4f9; color: #333; max-width: 960px; margin: 20px auto; padding: 20px; line-height: 1.6; }
         .container { background-color: #fff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         h1, h2, h3 { text-align: center; color: #2c3e50; }
@@ -58,31 +57,31 @@
                     <div class="question-block">
                         <h3>1. 哪个视频的唇形与语音同步性更好？</h3>
                         <div class="options">
-                            <label class="option">非常偏好视频A<br><input type="radio" name="q1" value="1"></label>
-                            <label class="option">偏好视频A<br><input type="radio" name="q1" value="2"></label>
-                            <label class="option">无明显差异<br><input type="radio" name="q1" value="3"></label>
-                            <label class="option">偏好视频B<br><input type="radio" name="q1" value="4"></label>
-                            <label class="option">非常偏好视频B<br><input type="radio" name="q1" value="5"></label>
+                            <label class="option">非常偏好视频A<br><input type="radio" name="q1" value="非常偏好视频A"></label>
+                            <label class="option">偏好视频A<br><input type="radio" name="q1" value="偏好视频A"></label>
+                            <label class="option">无明显差异<br><input type="radio" name="q1" value="无明显差异"></label>
+                            <label class="option">偏好视频B<br><input type="radio" name="q1" value="偏好视频B"></label>
+                            <label class="option">非常偏好视频B<br><input type="radio" name="q1" value="非常偏好视频B"></label>
                         </div>
                     </div>
                     <div class="question-block">
                         <h3>2. 哪个视频的面部表情更生动？</h3>
                         <div class="options">
-                            <label class="option">非常偏好视频A<br><input type="radio" name="q2" value="1"></label>
-                            <label class="option">偏好视频A<br><input type="radio" name="q2" value="2"></label>
-                            <label class="option">无明显差异<br><input type="radio" name="q2" value="3"></label>
-                            <label class="option">偏好视频B<br><input type="radio" name="q2" value="4"></label>
-                            <label class="option">非常偏好视频B<br><input type="radio" name="q2" value="5"></label>
+                            <label class="option">非常偏好视频A<br><input type="radio" name="q2" value="非常偏好视频A"></label>
+                            <label class="option">偏好视频A<br><input type="radio" name="q2" value="偏好视频A"></label>
+                            <label class="option">无明显差异<br><input type="radio" name="q2" value="无明显差异"></label>
+                            <label class="option">偏好视频B<br><input type="radio" name="q2" value="偏好视频B"></label>
+                            <label class="option">非常偏好视频B<br><input type="radio" name="q2" value="非常偏好视频B"></label>
                         </div>
                     </div>
                     <div class="question-block">
                         <h3>3. 哪个视频的动画更真实？</h3>
                         <div class="options">
-                            <label class="option">非常偏好视频A<br><input type="radio" name="q3" value="1"></label>
-                            <label class="option">偏好视频A<br><input type="radio" name="q3" value="2"></label>
-                            <label class="option">无明显差异<br><input type="radio" name="q3" value="3"></label>
-                            <label class="option">偏好视频B<br><input type="radio" name="q3" value="4"></label>
-                            <label class="option">非常偏好视频B<br><input type="radio" name="q3" value="5"></label>
+                            <label class="option">非常偏好视频A<br><input type="radio" name="q3" value="非常偏好视频A"></label>
+                            <label class="option">偏好视频A<br><input type="radio" name="q3" value="偏好视频A"></label>
+                            <label class="option">无明显差异<br><input type="radio" name="q3" value="无明显差异"></label>
+                            <label class="option">偏好视频B<br><input type="radio" name="q3" value="偏好视频B"></label>
+                            <label class="option">非常偏好视频B<br><input type="radio" name="q3" value="非常偏好视频B"></label>
                         </div>
                     </div>
                 </form>
@@ -95,6 +94,7 @@
     </div>
 
     <script>
+        // 最终修正版的 JavaScript 代码
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwz0kBj8DlEl6h5cEStT9pdxHWN1qA8Esvp4j64s4JccWomaTg5wOEjLotNRBrOOiPA/exec';
 
         const form = document.getElementById('study-form');
@@ -102,7 +102,45 @@
         const errorMessage = document.getElementById('error-message');
         const surveyContent = document.getElementById('survey-content');
 
-       });
+        submitBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+            
+            // 直接获取被选中的值
+            const q1_value = form.elements['q1'].value;
+            const q2_value = form.elements['q2'].value;
+            const q3_value = form.elements['q3'].value;
+
+            if (q1_value && q2_value && q3_value) {
+                errorMessage.style.display = 'none';
+                submitBtn.disabled = true;
+                submitBtn.textContent = '提交中...';
+                
+                const results = {
+                    lip_sync: q1_value,
+                    liveliness: q2_value,
+                    realism: q3_value
+                };
+                
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(results)
+                })
+                .then(res => {
+                    console.log("Data sent successfully.", results);
+                    surveyContent.innerHTML = '<h2>感谢您的参与！您的回答已成功提交。</h2>';
+                })
+                .catch(err => {
+                    console.error("Error sending data:", err);
+                    alert("提交时发生错误，请重试。");
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = '提交';
+                });
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        });
     </script>
 </body>
 </html>
