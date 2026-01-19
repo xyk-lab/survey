@@ -7,17 +7,21 @@
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f4f9; color: #333; max-width: 960px; margin: 20px auto; padding: 20px; line-height: 1.6; }
         .container { background-color: #fff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        h1, h2, h3 { text-align: center; color: #2c3e50; }
+        h1, h2 { text-align: center; color: #2c3e50; }
         .instructions { text-align: left; margin-bottom: 25px; background-color: #ecf0f1; padding: 15px; border-radius: 8px; border-left: 5px solid #3498db; }
         .video-container { display: flex; justify-content: space-around; gap: 20px; margin-bottom: 25px; }
         .video-wrapper { text-align: center; flex: 1; }
         video { width: 100%; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
         .questions-container { background-color: #fafafa; padding: 20px; border-radius: 8px; border-top: 2px solid #e0e0e0; }
-        .question-block { margin-bottom: 30px; }
-        .options { display: flex; justify-content: space-between; text-align: center; }
-        .option { display: flex; flex-direction: column; align-items: center; cursor: pointer; padding: 10px; border-radius: 5px; transition: background-color 0.2s; }
-        .option:hover { background-color: #eef5ff; }
-        input[type="radio"] { margin-bottom: 8px; transform: scale(1.2); }
+        
+        /* 矩阵表格样式 */
+        .matrix-table { width: 100%; border-collapse: collapse; text-align: center; }
+        .matrix-table th, .matrix-table td { padding: 15px 10px; }
+        .matrix-table thead th { font-size: 14px; font-weight: normal; color: #555; }
+        .matrix-table tbody tr { border-top: 1px solid #e0e0e0; }
+        .matrix-table tbody td:first-child { text-align: left; font-weight: bold; width: 30%; }
+        .matrix-table input[type="radio"] { transform: scale(1.3); cursor: pointer; }
+
         .submit-container { text-align: center; margin-top: 25px; }
         #submit-btn { padding: 12px 30px; font-size: 18px; font-weight: bold; background-color: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.2s; }
         #submit-btn:disabled { background-color: #bdc3c7; cursor: not-allowed; }
@@ -29,61 +33,55 @@
     <div class="container">
         <h1>请您评判哪个视频的面部动画效果更好</h1>
         <div class="instructions">
-            <p>在本任务中，您会看到由两种不同方法生成的虚拟角色动画，它们的语音是完全相同的。</p>
-            <p style="text-align: center; color: #c0392b; font-weight: bold;">❗两个视频都有声音，请您务必打开音频进行收听！</p>
-            <p>请您根据以下三个标准，选出您更偏好的视频：</p>
-            <ol>
-                <li><strong>唇形与语音的同步性：</strong> 嘴唇动作是否与发音准确对应？</li>
-                <li><strong>面部表情的生动性：</strong> 整体面部动画（眉毛、眼神等）是否看起来更生动、更富有动态？</li>
-                <li><strong>动画的真实感：</strong> 整体动画看起来是否更真实自然？有没有不协调或夸张的地方？</li>
-            </ol>
-            <p>请至少完整观看并收听两个视频一次，然后再进行选择。</p>
+            <p>在本任务中，您将看到两段由不同方法制作的虚拟角色视频。它们的面部动作和口型同步都是基于相同的音频生成的。</p>
+            <p style="text-align: center; color: #c0392b; font-weight: bold;">❗这两个视频有声音，请听！</p>
+            <p>请至少完整观看并收听两个视频一次，然后根据以下维度进行选择。</p>
         </div>
         
         <div id="survey-content">
             <div class="video-container">
                 <div class="video-wrapper">
-                    <h3>视频 A</h3>
+                    <h2>视频 A</h2>
                     <video controls src="video_a.mp4"></video>
                 </div>
                 <div class="video-wrapper">
-                    <h3>视频 B</h3>
+                    <h2>视频 B</h2>
                     <video controls src="video_b.mp4"></video>
                 </div>
             </div>
 
             <div class="questions-container">
                 <form id="study-form">
-                    <div class="question-block">
-                        <h3>1. 哪个视频的唇形与语音同步性更好？</h3>
-                        <div class="options">
-                            <label class="option">非常偏好视频A<br><input type="radio" name="q1" value="非常偏好视频A"></label>
-                            <label class="option">偏好视频A<br><input type="radio" name="q1" value="偏好视频A"></label>
-                            <label class="option">无明显差异<br><input type="radio" name="q1" value="无明显差异"></label>
-                            <label class="option">偏好视频B<br><input type="radio" name="q1" value="偏好视频B"></label>
-                            <label class="option">非常偏好视频B<br><input type="radio" name="q1" value="非常偏好视频B"></label>
-                        </div>
-                    </div>
-                    <div class="question-block">
-                        <h3>2. 哪个视频的面部表情更生动？</h3>
-                        <div class="options">
-                            <label class="option">非常偏好视频A<br><input type="radio" name="q2" value="非常偏好视频A"></label>
-                            <label class="option">偏好视频A<br><input type="radio" name="q2" value="偏好视频A"></label>
-                            <label class="option">无明显差异<br><input type="radio" name="q2" value="无明显差异"></label>
-                            <label class="option">偏好视频B<br><input type="radio" name="q2" value="偏好视频B"></label>
-                            <label class="option">非常偏好视频B<br><input type="radio" name="q2" value="非常偏好视频B"></label>
-                        </div>
-                    </div>
-                    <div class="question-block">
-                        <h3>3. 哪个视频的动画更真实？</h3>
-                        <div class="options">
-                            <label class="option">非常偏好视频A<br><input type="radio" name="q3" value="非常偏好视频A"></label>
-                            <label class="option">偏好视频A<br><input type="radio" name="q3" value="偏好视频A"></label>
-                            <label class="option">无明显差异<br><input type="radio" name="q3" value="无明显差异"></label>
-                            <label class="option">偏好视频B<br><input type="radio" name="q3" value="偏好视频B"></label>
-                            <label class="option">非常偏好视频B<br><input type="radio" name="q3" value="非常偏好视频B"></label>
-                        </div>
-                    </div>
+                    <table class="matrix-table">
+                        <thead>
+                            <tr>
+                                <th></th> <!-- 左上角留空 -->
+                                <th>非常偏好视频A</th>
+                                <th>偏好视频A</th>
+                                <th>无明显差异</th>
+                                <th>偏好视频B</th>
+                                <th>非常偏好视频B</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>口型同步性</strong><br><small>口部开合与语音同步吗？</small></td>
+                                <td><input type="radio" name="lip_sync" value="非常偏好视频A"></td>
+                                <td><input type="radio" name="lip_sync" value="偏好视频A"></td>
+                                <td><input type="radio" name="lip_sync" value="无明显差异"></td>
+                                <td><input type="radio" name="lip_sync" value="偏好视频B"></td>
+                                <td><input type="radio" name="lip_sync" value="非常偏好视频B"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>面部表情与真实感</strong><br><small>哪个表情更丰富、情感更真实？</small></td>
+                                <td><input type="radio" name="realism" value="非常偏好视频A"></td>
+                                <td><input type="radio" name="realism" value="偏好视频A"></td>
+                                <td><input type="radio" name="realism" value="无明显差异"></td>
+                                <td><input type="radio" name="realism" value="偏好视频B"></td>
+                                <td><input type="radio" name="realism" value="非常偏好视频B"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </form>
             </div>
             <div class="submit-container">
@@ -94,8 +92,8 @@
     </div>
 
     <script>
-        // 最终修正版的 JavaScript 代码
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwz0kBj8DlEl6h5cEStT9pdxHWN1qA8Esvp4j64s4JccWomaTg5wOEjLotNRBrOOiPA/exec';
+        // 最终修正版 JavaScript (适用于矩阵布局)
+        const SCRIPT_URL = '在这里粘贴你自己的Google Apps Script Web应用URL';
 
         const form = document.getElementById('study-form');
         const submitBtn = document.getElementById('submit-btn');
@@ -105,20 +103,17 @@
         submitBtn.addEventListener('click', function(event) {
             event.preventDefault();
             
-            // 直接获取被选中的值
-            const q1_value = form.elements['q1'].value;
-            const q2_value = form.elements['q2'].value;
-            const q3_value = form.elements['q3'].value;
+            const lip_sync_value = form.elements['lip_sync'].value;
+            const realism_value = form.elements['realism'].value;
 
-            if (q1_value && q2_value && q3_value) {
+            if (lip_sync_value && realism_value) {
                 errorMessage.style.display = 'none';
                 submitBtn.disabled = true;
                 submitBtn.textContent = '提交中...';
                 
                 const results = {
-                    lip_sync: q1_value,
-                    liveliness: q2_value,
-                    realism: q3_value
+                    lip_sync: lip_sync_value,
+                    realism: realism_value
                 };
                 
                 fetch(SCRIPT_URL, {
