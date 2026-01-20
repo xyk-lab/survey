@@ -8,10 +8,10 @@
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f4f9; color: #333; max-width: 960px; margin: 20px auto; padding: 20px; line-height: 1.6; }
         .container { background-color: #fff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         h1, h2 { text-align: center; color: #2c3e50; }
+        h2 .emotion-tag { display: inline-block; background-color: #3498db; color: white; font-size: 16px; padding: 4px 12px; border-radius: 15px; margin-left: 10px; vertical-align: middle; }
         .instructions { text-align: left; margin-bottom: 25px; background-color: #ecf0f1; padding: 15px; border-radius: 8px; border-left: 5px solid #3498db; }
-        .instructions ul { padding-left: 20px; }
         .video-container { text-align: center; margin-bottom: 25px; }
-        video { width: 60%; max-width: 800px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+        video { width: 100%; max-width: 800px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
         .questions-container { background-color: #fafafa; padding: 20px; border-radius: 8px; border-top: 2px solid #e0e0e0; }
         .matrix-table { width: 100%; border-collapse: collapse; text-align: center; }
         .matrix-table th, .matrix-table td { padding: 15px 10px; }
@@ -29,217 +29,30 @@
 </head>
 <body>
     <div class="container">
-        <h1>请您评判哪个视频的面部动画效果更好</h1>
+        <h1>请您评判哪个视频的动画效果更好</h1>
         <div class="instructions">
-             <p>在本任务中，您将看到 5 个包含左右分屏的视频，每个视频分别代表 A (左) 和 B (右) 两种方法。它们的面部动作和口型同步都是基于相同的音频生成的。</p>
-             <p>哪个视频的口型同步性更好：关注每个音节的准确发音以及口部开合与语音同步吗？</p>
-             <p>哪个视频的面部表情更丰富，情感更真实？请选出看起来整体面部动作更生动、动态的视频。</p>
-             <p>请您依次完成全部 5 个题目的评判，然后在页面底部点击“全部提交”按钮。</p>
+             <p>在本任务中，您将看到 15 个包含左右分屏的视频，每个视频分别代表 A (左) 和 B (右) 两种方法。它们都是基于相同的音频生成的。</p>
+             <p>请您依次完成全部 15 个题目的评判，然后在页面底部点击“全部提交”按钮。</p>
              <p style="text-align: center; color: #c0392b; font-weight: bold;">❗所有视频都有声音，请听！</p>
         </div>
         
         <form id="master-form">
-            <!-- ==================== 第 1 题 ==================== -->
-            <div class="question-item" id="item-1">
-                <h2>第 1 题</h2>
-                <div class="video-container">
-                    <video controls src="your_combined_video.mp4"></video> <!-- ！！！修改第1题的视频文件名！！！ -->
-                </div>
-                <div class="questions-container">
-                    <table class="matrix-table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>A (左侧) 明显更好</th>
-                                <th>A (左侧) 略好一些</th>
-                                <th>效果相当</th>
-                                <th>B (右侧) 略好一些</th>
-                                <th>B (右侧) 明显更好</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>口型同步性</strong></td>
-                                <td><input type="radio" name="lip_sync_1" value="1"></td>
-                                <td><input type="radio" name="lip_sync_1" value="2"></td>
-                                <td><input type="radio" name="lip_sync_1" value="3"></td>
-                                <td><input type="radio" name="lip_sync_1" value="4"></td>
-                                <td><input type="radio" name="lip_sync_1" value="5"></td>
-                            </tr>
-                            <tr>
-                                <td><strong>面部表情与真实感</strong></td>
-                                <td><input type="radio" name="realism_1" value="1"></td>
-                                <td><input type="radio" name="realism_1" value="2"></td>
-                                <td><input type="radio" name="realism_1" value="3"></td>
-                                <td><input type="radio" name="realism_1" value="4"></td>
-                                <td><input type="radio" name="realism_1" value="5"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <div class="question-item" id="item-1"></div>
+            <div class="question-item" id="item-2"></div>
+            <div class="question-item" id="item-3"></div>
+            <div class="question-item" id="item-4"></div>
+            <div class="question-item" id="item-5"></div>
+            <div class="question-item" id="item-6"></div>
+            <div class="question-item" id="item-7"></div>
+            <div class="question-item" id="item-8"></div>
+            <div class="question-item" id="item-9"></div>
+            <div class="question-item" id="item-10"></div>
+            <div class="question-item" id="item-11"></div>
+            <div class="question-item" id="item-12"></div>
+            <div class="question-item" id="item-13"></div>
+            <div class="question-item" id="item-14"></div>
+            <div class="question-item" id="item-15"></div>
             
-            <!-- ==================== 第 2 题 ==================== -->
-            <div class="question-item" id="item-2">
-                <h2>第 2 题</h2>
-                <div class="video-container">
-                    <video controls src="your_combined_video.mp4"></video> <!-- ！！！修改第2题的视频文件名！！！ -->
-                </div>
-                <div class="questions-container">
-                    <table class="matrix-table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>A (左侧) 明显更好</th>
-                                <th>A (左侧) 略好一些</th>
-                                <th>效果相当</th>
-                                <th>B (右侧) 略好一些</th>
-                                <th>B (右侧) 明显更好</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>口型同步性</strong></td>
-                                <td><input type="radio" name="lip_sync_2" value="1"></td>
-                                <td><input type="radio" name="lip_sync_2" value="2"></td>
-                                <td><input type="radio" name="lip_sync_2" value="3"></td>
-                                <td><input type="radio" name="lip_sync_2" value="4"></td>
-                                <td><input type="radio" name="lip_sync_2" value="5"></td>
-                            </tr>
-                            <tr>
-                                <td><strong>面部表情与真实感</strong></td>
-                                <td><input type="radio" name="realism_2" value="1"></td>
-                                <td><input type="radio" name="realism_2" value="2"></td>
-                                <td><input type="radio" name="realism_2" value="3"></td>
-                                <td><input type="radio" name="realism_2" value="4"></td>
-                                <td><input type="radio" name="realism_2" value="5"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- ==================== 第 3 题 ==================== -->
-            <div class="question-item" id="item-3">
-                <h2>第 3 题</h2>
-                <div class="video-container">
-                    <video controls src="your_combined_video.mp4"></video> <!-- ！！！修改第3题的视频文件名！！！ -->
-                </div>
-                <div class="questions-container">
-                    <table class="matrix-table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>A (左侧) 明显更好</th>
-                                <th>A (左侧) 略好一些</th>
-                                <th>效果相当</th>
-                                <th>B (右侧) 略好一些</th>
-                                <th>B (右侧) 明显更好</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>口型同步性</strong></td>
-                                <td><input type="radio" name="lip_sync_3" value="1"></td>
-                                <td><input type="radio" name="lip_sync_3" value="2"></td>
-                                <td><input type="radio" name="lip_sync_3" value="3"></td>
-                                <td><input type="radio" name="lip_sync_3" value="4"></td>
-                                <td><input type="radio" name="lip_sync_3" value="5"></td>
-                            </tr>
-                            <tr>
-                                <td><strong>面部表情与真实感</strong></td>
-                                <td><input type="radio" name="realism_3" value="1"></td>
-                                <td><input type="radio" name="realism_3" value="2"></td>
-                                <td><input type="radio" name="realism_3" value="3"></td>
-                                <td><input type="radio" name="realism_3" value="4"></td>
-                                <td><input type="radio" name="realism_3" value="5"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- ==================== 第 4 题 ==================== -->
-            <div class="question-item" id="item-4">
-                <h2>第 4 题</h2>
-                <div class="video-container">
-                    <video controls src="your_combined_video.mp4"></video> <!-- ！！！修改第4题的视频文件名！！！ -->
-                </div>
-                <div class="questions-container">
-                    <table class="matrix-table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>A (左侧) 明显更好</th>
-                                <th>A (左侧) 略好一些</th>
-                                <th>效果相当</th>
-                                <th>B (右侧) 略好一些</th>
-                                <th>B (右侧) 明显更好</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>口型同步性</strong></td>
-                                <td><input type="radio" name="lip_sync_4" value="1"></td>
-                                <td><input type="radio" name="lip_sync_4" value="2"></td>
-                                <td><input type="radio" name="lip_sync_4" value="3"></td>
-                                <td><input type="radio" name="lip_sync_4" value="4"></td>
-                                <td><input type="radio" name="lip_sync_4" value="5"></td>
-                            </tr>
-                            <tr>
-                                <td><strong>面部表情与真实感</strong></td>
-                                <td><input type="radio" name="realism_4" value="1"></td>
-                                <td><input type="radio" name="realism_4" value="2"></td>
-                                <td><input type="radio" name="realism_4" value="3"></td>
-                                <td><input type="radio" name="realism_4" value="4"></td>
-                                <td><input type="radio" name="realism_4" value="5"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
-            <!-- ==================== 第 5 题 ==================== -->
-            <div class="question-item" id="item-5">
-                <h2>第 5 题</h2>
-                <div class="video-container">
-                    <video controls src="your_combined_video.mp4"></video> <!-- ！！！修改第5题的视频文件名！！！ -->
-                </div>
-                <div class="questions-container">
-                    <table class="matrix-table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>A (左侧) 明显更好</th>
-                                <th>A (左侧) 略好一些</th>
-                                <th>效果相当</th>
-                                <th>B (右侧) 略好一些</th>
-                                <th>B (右侧) 明显更好</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>口型同步性</strong></td>
-                                <td><input type="radio" name="lip_sync_5" value="1"></td>
-                                <td><input type="radio" name="lip_sync_5" value="2"></td>
-                                <td><input type="radio" name="lip_sync_5" value="3"></td>
-                                <td><input type="radio" name="lip_sync_5" value="4"></td>
-                                <td><input type="radio" name="lip_sync_5" value="5"></td>
-                            </tr>
-                            <tr>
-                                <td><strong>面部表情与真实感</strong></td>
-                                <td><input type="radio" name="realism_5" value="1"></td>
-                                <td><input type="radio" name="realism_5" value="2"></td>
-                                <td><input type="radio" name="realism_5" value="3"></td>
-                                <td><input type="radio" name="realism_5" value="4"></td>
-                                <td><input type="radio" name="realism_5" value="5"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
-            <!-- 总的提交区域 -->
             <div class="submit-container">
                 <p class="error-message" id="master-error-message">您还有未完成的题目，请检查！</p>
                 <button id="master-submit-button" class="submit-button">全部提交</button>
@@ -248,18 +61,119 @@
     </div>
 
     <script>
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbycwz4IgVtZhEZ8_OxgJt0HqYfNFCfimvzXkYjVsNUItjIKD6Xwy-8oSA1WPqiMmESw/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxHt4lzHYgLOZDwcaBCM2LfwqyDH4DRrfVfvs8UIpWS3qlRdWLCXzupwaGOPF203ubS/exec';
 
         // ==================== 核心配置区域 ====================
         const questionConfig = {
-            "1": { modelA: "Ours", modelB: "DiffPoseTalk" },
-            "2": { modelA: "Lsf animation", modelB: "Ours" }, // 示例：第2题左右模型对调
-            "3": { modelA: "Gt ", modelB: "Ours" },
-            "4": { modelA: "EMOTE", modelB: "Ours" },
-            "5": { modelA: "Ours", modelB: "StyleTalk" }
+            // 题型一 (type: 1): 口型同步性 + 面部表情与真实感
+            "1": { type: 1, modelA: "Ours", modelB: "DiffPoseTalk", emotion: "Angry", videoSrc: "1.mp4" },
+            "2": { type: 1, modelA: "DiffPoseTalk", modelB: "Ours", emotion: "Happy", videoSrc: "2.mp4" },
+            "3": { type: 1, modelA: "Ours", modelB: "FaceFormer", emotion: "Sad", videoSrc: "3.mp4" },
+            "4": { type: 1, modelA: "EMOTE", modelB: "Ours", emotion: "Surprised", videoSrc: "4.mp4" },
+            "5": { type: 1, modelA: "Ours", modelB: "StyleTalk", emotion: "Neutral", videoSrc: "5.mp4" },
+            "6": { type: 1, modelA: "Ours", modelB: "BaselineA", emotion: "Fearful", videoSrc: "6.mp4" },
+            "7": { type: 1, modelA: "BaselineB", modelB: "Ours", emotion: "Disgusted", videoSrc: "7.mp4" },
+            
+            // 题型二 (type: 2): 头部运动更自然
+            "8": { type: 2, modelA: "Ours", modelB: "BaselineC", emotion: "Surprised", videoSrc: "8.mp4" },
+            "9": { type: 2, modelA: "BaselineD", modelB: "Ours", emotion: "Neutral", videoSrc: "9.mp4" },
+            "10": { type: 2, modelA: "Ours", modelB: "BaselineE", emotion: "Happy", videoSrc: "10.mp4" },
+            "11": { type: 2, modelA: "BaselineF", modelB: "Ours", emotion: "Sad", videoSrc: "11.mp4" },
+            "12": { type: 2, modelA: "Ours", modelB: "BaselineG", emotion: "Angry", videoSrc: "12.mp4" },
+            
+            // 题型三 (type: 3): 整体头部动画更丰富，更能反映情感
+            "13": { type: 3, modelA: "Ours", modelB: "BaselineH", emotion: "Angry", videoSrc: "13.mp4" },
+            "14": { type: 3, modelA: "BaselineI", modelB: "Ours", emotion: "Sad", videoSrc: "14.mp4" },
+            "15": { type: 3, modelA: "Ours", modelB: "BaselineJ", emotion: "Happy", videoSrc: "15.mp4" }
         };
         // =======================================================
+        
+        // 页面加载时，动态生成所有题目
+        document.addEventListener('DOMContentLoaded', () => {
+            const totalQuestions = 15;
 
+            for (let i = 1; i <= totalQuestions; i++) {
+                const config = questionConfig[i];
+                if (!config) continue;
+
+                const item = document.getElementById(`item-${i}`);
+                let tableHTML = '';
+                
+                // 根据题型生成不同的表格
+                if (config.type === 1) {
+                    tableHTML = `
+                        <tbody>
+                            <tr>
+                                <td><strong>口型同步性</strong></td>
+                                <td><input type="radio" name="lip_sync_${i}" value="1"></td>
+                                <td><input type="radio" name="lip_sync_${i}" value="2"></td>
+                                <td><input type="radio" name="lip_sync_${i}" value="3"></td>
+                                <td><input type="radio" name="lip_sync_${i}" value="4"></td>
+                                <td><input type="radio" name="lip_sync_${i}" value="5"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>面部表情与真实感</strong></td>
+                                <td><input type="radio" name="realism_${i}" value="1"></td>
+                                <td><input type="radio" name="realism_${i}" value="2"></td>
+                                <td><input type="radio" name="realism_${i}" value="3"></td>
+                                <td><input type="radio" name="realism_${i}" value="4"></td>
+                                <td><input type="radio" name="realism_${i}" value="5"></td>
+                            </tr>
+                        </tbody>
+                    `;
+                } else if (config.type === 2) {
+                    tableHTML = `
+                        <tbody>
+                            <tr>
+                                <td><strong>哪个视频的头部运动更自然？</strong><br><small>(为了专注于头部运动，此处的面部表情用的没有情绪的表情)</small></td>
+                                <td><input type="radio" name="head_motion_${i}" value="1"></td>
+                                <td><input type="radio" name="head_motion_${i}" value="2"></td>
+                                <td><input type="radio" name="head_motion_${i}" value="3"></td>
+                                <td><input type="radio" name="head_motion_${i}" value="4"></td>
+                                <td><input type="radio" name="head_motion_${i}" value="5"></td>
+                            </tr>
+                        </tbody>
+                    `;
+                } else if (config.type === 3) {
+                    tableHTML = `
+                        <tbody>
+                            <tr>
+                                <td><strong>哪个视频的整体头部动画更丰富，更能反映情感？</strong></td>
+                                <td><input type="radio" name="head_emotion_${i}" value="1"></td>
+                                <td><input type="radio" name="head_emotion_${i}" value="2"></td>
+                                <td><input type="radio" name="head_emotion_${i}" value="3"></td>
+                                <td><input type="radio" name="head_emotion_${i}" value="4"></td>
+                                <td><input type="radio" name="head_emotion_${i}" value="5"></td>
+                            </tr>
+                        </tbody>
+                    `;
+                }
+
+                item.innerHTML = `
+                    <h2>第 ${i} 题 <span class="emotion-tag">${config.emotion}</span></h2>
+                    <div class="video-container">
+                        <video controls src="${config.videoSrc}"></video>
+                    </div>
+                    <div class="questions-container">
+                        <table class="matrix-table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>A (左侧) 明显更好</th>
+                                    <th>A (左侧) 略好一些</th>
+                                    <th>效果相当</th>
+                                    <th>B (右侧) 略好一些</th>
+                                    <th>B (右侧) 明显更好</th>
+                                </tr>
+                            </thead>
+                            ${tableHTML}
+                        </table>
+                    </div>
+                `;
+            }
+        });
+
+        // 用户ID生成函数
         function generateUserID() {
             let userID = localStorage.getItem('surveyUserID');
             if (!userID) {
@@ -273,8 +187,9 @@
         const masterForm = document.getElementById('master-form');
         const masterSubmitBtn = document.getElementById('master-submit-button');
         const masterErrorMsg = document.getElementById('master-error-message');
-        const totalQuestions = 5;
+        const totalQuestions = 15;
 
+        // 提交按钮的事件监听
         masterSubmitBtn.addEventListener('click', function(event) {
             event.preventDefault();
             
@@ -282,35 +197,41 @@
             const finalResults = { userID: userID };
 
             for (let i = 1; i <= totalQuestions; i++) {
-                const lip_sync_choice = masterForm.elements[`lip_sync_${i}`].value;
-                const realism_choice = masterForm.elements[`realism_${i}`].value;
-
-                if (!lip_sync_choice || !realism_choice) {
-                    allAnswered = false;
-                    break; 
-                }
-
                 const config = questionConfig[i];
-                if (!config) {
-                    alert(`错误：找不到第 ${i} 题的配置！`);
-                    allAnswered = false;
-                    break;
-                }
+                if (!config) continue;
                 
-                function translateChoice(choice, modelA, modelB) {
-                    const choiceNum = parseInt(choice);
-                    switch (choiceNum) {
-                        case 1: return `${modelA} (明显更好)`;
-                        case 2: return `${modelA} (略好一些)`;
-                        case 3: return '效果相当';
-                        case 4: return `${modelB} (略好一些)`;
-                        case 5: return `${modelB} (明显更好)`;
-                        default: return '未知';
+                let isCurrentQuestionAnswered = true;
+                
+                // 根据题型检查和打包数据
+                if (config.type === 1) {
+                    const lip_sync_choice = masterForm.elements[`lip_sync_${i}`].value;
+                    const realism_choice = masterForm.elements[`realism_${i}`].value;
+                    if (!lip_sync_choice || !realism_choice) {
+                        isCurrentQuestionAnswered = false;
+                    } else {
+                        finalResults[`q${i}_lip_sync`] = translateChoice(lip_sync_choice, config.modelA, config.modelB);
+                        finalResults[`q${i}_realism`] = translateChoice(realism_choice, config.modelA, config.modelB);
+                    }
+                } else if (config.type === 2) {
+                    const head_motion_choice = masterForm.elements[`head_motion_${i}`].value;
+                    if (!head_motion_choice) {
+                        isCurrentQuestionAnswered = false;
+                    } else {
+                        finalResults[`q${i}_head_motion`] = translateChoice(head_motion_choice, config.modelA, config.modelB);
+                    }
+                } else if (config.type === 3) {
+                    const head_emotion_choice = masterForm.elements[`head_emotion_${i}`].value;
+                    if (!head_emotion_choice) {
+                        isCurrentQuestionAnswered = false;
+                    } else {
+                        finalResults[`q${i}_head_emotion`] = translateChoice(head_emotion_choice, config.modelA, config.modelB);
                     }
                 }
                 
-                finalResults[`q${i}_lip_sync`] = translateChoice(lip_sync_choice, config.modelA, config.modelB);
-                finalResults[`q${i}_realism`] = translateChoice(realism_choice, config.modelA, config.modelB);
+                if (!isCurrentQuestionAnswered) {
+                    allAnswered = false;
+                    break; 
+                }
             }
 
             if (allAnswered) {
@@ -321,11 +242,10 @@
                 fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(finalResults)
                 })
                 .then(() => {
-                    console.log("All data sent successfully as a single package.", finalResults);
+                    console.log("All data sent successfully.", finalResults);
                     masterForm.innerHTML = `<h2 class="success-message">全部提交成功，感谢您的参与！</h2>`;
                 })
                 .catch(err => {
@@ -338,11 +258,25 @@
                 masterErrorMsg.style.display = 'block';
             }
         });
+        
+        // 翻译函数
+        function translateChoice(choice, modelA, modelB) {
+            const choiceNum = parseInt(choice);
+            switch (choiceNum) {
+                case 1: return `${modelA} (明显更好)`;
+                case 2: return `${modelA} (略好一些)`;
+                case 3: return '效果相当';
+                case 4: return `${modelB} (略好一些)`;
+                case 5: return `${modelB} (明显更好)`;
+                default: return '未知';
+            }
+        }
     </script>
 </body>
-</html>.display = 'block';
+</html>明显更好)`;
+                default: return '未知';
             }
-        });
+        }
     </script>
 </body>
 </html>
